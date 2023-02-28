@@ -27,9 +27,7 @@ app.use(helmet.xssFilter())
 app.use(helmet.noSniff())
 app.use(helmet.hidePoweredBy({setTo: 'PHP 7.4.3'}))
 app.use(helmet.noCache())
-// app.use(helmet({
-//   contentSecurityPolicy: false
-// }));
+
 
 // Index page (static HTML)
 app.route('/')
