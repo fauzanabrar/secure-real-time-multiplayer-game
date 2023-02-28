@@ -10,6 +10,8 @@ const runner = require('./test-runner.js');
 
 const app = express();
 
+const helmet = require('helmet')
+
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/assets', express.static(process.cwd() + '/assets'));
 
@@ -18,6 +20,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //For FCC testing purposes and enables user to connect from outside the hosting platform
 app.use(cors({origin: '*'})); 
+
+//Secure with helmet
+app.use(helmet())
+app.use(helmet.xssFilter())
+app.use(helmet.noSniff())
+app.use(helmet.hidePoweredBy({setTo: 'PHP 7.4.3'}))
+app.use(helmet.noCache())
+// app.use(helmet({
+//   contentSecurityPolicy: false
+// }));
 
 // Index page (static HTML)
 app.route('/')
